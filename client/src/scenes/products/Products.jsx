@@ -11,9 +11,8 @@ import {
   useTheme,
   useMediaQuery,
 } from "@mui/material";
-import { Header } from "../../components/index";
+import Header from "../../components/Header";
 import { useGetProductsQuery } from "../../state/api";
-import { borderRadius } from "@mui/system";
 
 const Product = ({
   _id,
@@ -44,13 +43,14 @@ const Product = ({
         >
           {category}
         </Typography>
-        <Typography variant="h5" component={"div"}>
+        <Typography variant="h5" component="div">
           {name}
         </Typography>
         <Typography sx={{ mb: "1.5rem" }} color={theme.palette.secondary[400]}>
           ${Number(price).toFixed(2)}
         </Typography>
         <Rating value={rating} readOnly />
+
         <Typography variant="body2">{description}</Typography>
       </CardContent>
       <CardActions>
@@ -92,14 +92,14 @@ const Products = () => {
   return (
     <Box m="1.5rem 2.5rem">
       <Header title="PRODUCTS" subtitle="See your list of products." />
-      {data || !isLoading ? (
+      {data !== undefined || !isLoading ? (
         <Box
           mt="20px"
           display="grid"
           gridTemplateColumns="repeat(4, minmax(0, 1fr))"
-          justifyContent={"space-between"}
+          justifyContent="space-between"
           rowGap="20px"
-          columnGap={"1.33%"}
+          columnGap="1.33%"
           sx={{
             "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
           }}
@@ -130,7 +130,7 @@ const Products = () => {
           )}
         </Box>
       ) : (
-        <>'Loading...'</>
+        <>Loading...</>
       )}
     </Box>
   );
